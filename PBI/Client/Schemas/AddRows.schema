@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schemas.botframework.com/schemas/component/v1.0/component.schema",
+    "$role": "implements(Microsoft.IDialog)",
+    "title": "PBI Client - Add Rows",
+    "description": "This will insert rows in a table",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "datasetId": {
+            "$ref": "schema:#/definitions/stringExpression",
+            "title": "Dataset Id",
+            "description": "Value or expression to evaluate as a dataset id"
+        },
+        "tableName": {
+            "$ref": "schema:#/definitions/stringExpression",
+            "title": "Table Name",
+            "description": "Value or expression to evaluate as a table name"
+        },
+        "rowsDefinition": {
+            "$ref": "schema:#/definitions/objectExpression",
+            "title": "Rows Definition",
+            "description": "Value or expression to evaluate as rows to insert"
+        },
+        "resultProperty": {
+            "$ref": "schema:#/definitions/stringExpression",
+            "title": "Rows Added Result Property",
+            "description": "Property from callers memory to store the result of operation"
+        }
+    }
+}

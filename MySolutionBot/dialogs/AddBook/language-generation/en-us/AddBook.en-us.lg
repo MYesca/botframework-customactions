@@ -1,0 +1,26 @@
+[import](common.lg)
+
+# TextInput_Prompt_oUXjxB()
+[Activity
+    Text = Tell me the book's title please.
+]
+
+# TextInput_Prompt_V5GS2B()
+[Activity
+    Text = Now the author's name. Please type it exactly as you registered it in the author's record.
+]
+
+# TextInput_Prompt_B5GS2B()
+[Activity
+    Text = Now the book's category.
+]
+
+# NumberInput_Prompt_oshTRB()
+[Activity
+    Text = And finally, the year that this book was published.
+]
+
+# SendActivity_a00ZF7()
+[Activity
+    Text = Ok, new book registered.
+]

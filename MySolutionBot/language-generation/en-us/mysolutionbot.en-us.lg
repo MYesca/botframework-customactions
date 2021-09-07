@@ -1,0 +1,61 @@
+[import](common.lg)
+
+# SendActivity_Cidb7O()
+[Activity
+    Text = We are using the dataset named ${conversation.dsName}
+]
+
+# SendActivity_IbGEzS()
+[Activity
+    Text = Ok, listing all the reports in your workspace.
+]
+
+# SendActivity_87OKRE()
+[Activity
+    Attachments = ${json(reportCard(dialog.foreach.value))}
+]
+
+# TextInput_Prompt_AQeri0()
+[Activity
+    Text = Please write a question, related to your authors and books of course, and I will send it to Power BI.
+]
+
+# SendActivity_bWOCu1()
+[Activity
+    Text = Ok, I am waiting for Power BI to respond. Meanwhile, do you want to do something else?
+]
+
+# SendActivity_3eCbQR()
+[Activity
+    Attachments = ${json(bookEntry())}
+]
+
+# SendActivity_086Jjt()
+[Activity
+    Attachments = ${json(authorEntry())}
+]
+
+# SendActivity_WlvGDU()
+[Activity
+    Text = Sorry, I do not know how to create ${turn.activity.value.content} yet
+]
+
+# SendActivity_n7pjcG()
+[Activity
+    Text = Ok, book added.
+]
+
+# SendActivity_y1Pl2P()
+[Activity
+    Text = Ok, author added.
+]
+
+# TextInput_Prompt_f3hsDI()
+[Activity
+    Text = Please tell me the name of the dataset. It will be created if not exists.
+]
+
+# SendActivity_6aR9My()
+[Activity
+    Text = Dataset defined!
+]

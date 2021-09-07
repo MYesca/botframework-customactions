@@ -1,0 +1,118 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "ZtRZZY",
+    "name": "AddBook",
+    "description": "Adds a book the hard way"
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "tDVAqo"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "oUXjxB"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "prompt": "${TextInput_Prompt_oUXjxB()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "property": "dialog.bookTitle"
+        },
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "V5GS2B"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "prompt": "${TextInput_Prompt_V5GS2B()}",
+          "property": "dialog.bookAuthorName"
+        },
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "B5GS2B"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "prompt": "${TextInput_Prompt_B5GS2B()}",
+          "property": "dialog.bookCategory"
+        },
+        {
+          "$kind": "Microsoft.NumberInput",
+          "$designer": {
+            "id": "oshTRB"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "prompt": "${NumberInput_Prompt_oshTRB()}",
+          "property": "dialog.bookYearPublished"
+        },
+        {
+          "$kind": "AddRows",
+          "$designer": {
+            "id": "CBjFXB"
+          },
+          "datasetId": "=conversation.dsId",
+          "tableName": "Book",
+          "rowsDefinition": {
+            "rows": [
+              {
+                "Title": "${dialog.bookTitle}",
+                "AuthorName": "${dialog.bookAuthorName}",
+                "Category": "${dialog.bookCategory}",
+                "YearPublished": "${dialog.bookYearPublished}"
+              }
+            ]
+          },
+          "resultProperty": "dialog.rowsAdded"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "a00ZF7"
+          },
+          "activity": "${SendActivity_a00ZF7()}"
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "qPv54b"
+          },
+          "activityProcessed": true,
+          "dialog": "ListSamples",
+          "resultProperty": "dialog.choosenSample"
+        }
+      ]
+    }
+  ],
+  "generator": "AddBook.lg",
+  "recognizer": {
+    "$kind": "Microsoft.RegexRecognizer",
+    "intents": []
+  },
+  "id": "AddBook"
+}

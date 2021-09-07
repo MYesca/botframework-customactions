@@ -1,0 +1,354 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "$designer": {
+      "name": "MySolutionBot",
+      "description": "",
+      "id": "esDXVm"
+    }
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnConversationUpdateActivity",
+      "$designer": {
+        "id": "376720"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "SIBB3e"
+          },
+          "condition": "coalesce(conversation.dsName, \"\") == \"\"",
+          "actions": [
+            {
+              "$kind": "Microsoft.BeginDialog",
+              "$designer": {
+                "id": "GTkwcU"
+              },
+              "activityProcessed": true,
+              "dialog": "SetDataset"
+            }
+          ],
+          "elseActions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "Cidb7O"
+              },
+              "activity": "${SendActivity_Cidb7O()}"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "c2ceQC"
+          },
+          "activityProcessed": true,
+          "dialog": "ListSamples",
+          "resultProperty": "dialog.choosenSample"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "M4Pbw4",
+        "name": "AddAuthor"
+      },
+      "intent": "AddAuthor",
+      "actions": [
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "QgZP9P"
+          },
+          "condition": "turn.activity.channelId == \"emulator\" || turn.activity.channelId == \"webchat\" || turn.activity.channelId == \"teams\"",
+          "actions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "086Jjt"
+              },
+              "activity": "${SendActivity_086Jjt()}"
+            }
+          ],
+          "elseActions": [
+            {
+              "$kind": "Microsoft.BeginDialog",
+              "$designer": {
+                "id": "Gg5ARN"
+              },
+              "activityProcessed": true,
+              "dialog": "AddAuthor"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "MHJ2Mn",
+        "name": "AddBook"
+      },
+      "intent": "AddBook",
+      "actions": [
+        {
+          "$kind": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "QgZP6P"
+          },
+          "actions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "3eCbQR"
+              },
+              "activity": "${SendActivity_3eCbQR()}"
+            }
+          ],
+          "elseActions": [
+            {
+              "$kind": "Microsoft.BeginDialog",
+              "$designer": {
+                "id": "Gg5AZN"
+              },
+              "activityProcessed": true,
+              "dialog": "AddBook"
+            }
+          ],
+          "condition": "turn.activity.channelId == \"emulator\" || turn.activity.channelId == \"webchat\" || turn.activity.channelId == \"teams\""
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "95zzhR",
+        "name": "AskPBI"
+      },
+      "intent": "AskPBI",
+      "actions": [
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "AQeri0"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "prompt": "${TextInput_Prompt_AQeri0()}",
+          "property": "dialog.query"
+        },
+        {
+          "$kind": "GetQna",
+          "$designer": {
+            "id": "7J5vYN"
+          },
+          "datasetId": "=conversation.dsId",
+          "query": "=dialog.query"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "bWOCu1"
+          },
+          "activity": "${SendActivity_bWOCu1()}"
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "EbGrkd"
+          },
+          "activityProcessed": true,
+          "dialog": "ListSamples",
+          "resultProperty": "dialog.choosenSample"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "iN5SZg",
+        "name": "ListReports"
+      },
+      "intent": "ListReports",
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "IbGEzS"
+          },
+          "activity": "${SendActivity_IbGEzS()}"
+        },
+        {
+          "$kind": "ListReports",
+          "$designer": {
+            "id": "R4uQTs"
+          },
+          "resultProperty": "dialog.reportList"
+        },
+        {
+          "$kind": "Microsoft.Foreach",
+          "$designer": {
+            "id": "mTea0U"
+          },
+          "index": "dialog.foreach.index",
+          "value": "dialog.foreach.value",
+          "itemsProperty": "dialog.reportList.value",
+          "actions": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "87OKRE"
+              },
+              "activity": "${SendActivity_87OKRE()}"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "Oz2qRG"
+          },
+          "activityProcessed": true,
+          "dialog": "ListSamples",
+          "resultProperty": "dialog.choosenSample"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnActivity",
+      "$designer": {
+        "id": "ydNITD"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.TraceActivity",
+          "$designer": {
+            "id": "3O3UNu"
+          },
+          "name": "MessageReceivedCheckpoint"
+        },
+        {
+          "$kind": "Microsoft.SwitchCondition",
+          "$designer": {
+            "id": "5d0WGi"
+          },
+          "condition": "turn.activity.value.content",
+          "cases": [
+            {
+              "value": "Book",
+              "actions": [
+                {
+                  "$kind": "AddRows",
+                  "$designer": {
+                    "id": "bxF5DV"
+                  },
+                  "datasetId": "=conversation.dsId",
+                  "tableName": "Book",
+                  "rowsDefinition": {
+                    "rows": [
+                      {
+                        "Title": "${turn.activity.value.bookTitle}",
+                        "AuthorName": "${turn.activity.value.bookAuthorName}",
+                        "Category": "${turn.activity.value.bookCategory}",
+                        "YearPublished": "${turn.activity.value.bookYearPublished}"
+                      }
+                    ]
+                  },
+                  "resultProperty": "dialog.rowsAdded"
+                },
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "n7pjcG"
+                  },
+                  "activity": "${SendActivity_n7pjcG()}"
+                }
+              ]
+            },
+            {
+              "value": "Author",
+              "actions": [
+                {
+                  "$kind": "AddRows",
+                  "$designer": {
+                    "id": "bxF5DV"
+                  },
+                  "datasetId": "=conversation.dsId",
+                  "tableName": "Author",
+                  "rowsDefinition": {
+                    "rows": [
+                      {
+                        "Name": "${turn.activity.value.authorName}",
+                        "Country": "${turn.activity.value.authorCountry}",
+                        "Age": "${turn.activity.value.authorAge}"
+                      }
+                    ]
+                  },
+                  "resultProperty": "dialog.rowsAdded"
+                },
+                {
+                  "$kind": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "y1Pl2P"
+                  },
+                  "activity": "${SendActivity_y1Pl2P()}"
+                }
+              ]
+            }
+          ],
+          "default": [
+            {
+              "$kind": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "WlvGDU"
+              },
+              "activity": "${SendActivity_WlvGDU()}"
+            }
+          ]
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "TXuh0C"
+          },
+          "activityProcessed": true,
+          "dialog": "ListSamples"
+        }
+      ],
+      "type": "message",
+      "condition": "coalesce(turn.activity.value.content, \"\") != \"\""
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "pCsjuP",
+        "name": "SetDataset"
+      },
+      "intent": "SetDataset",
+      "actions": [
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "YysSPq"
+          },
+          "activityProcessed": true,
+          "dialog": "SetDataset"
+        }
+      ]
+    }
+  ],
+  "$schema": "https://raw.githubusercontent.com/microsoft/BotFramework-Composer/stable/Composer/packages/server/schemas/sdk.schema",
+  "generator": "mysolutionbot.lg",
+  "id": "mysolutionbot",
+  "recognizer": "mysolutionbot.lu.qna"
+}

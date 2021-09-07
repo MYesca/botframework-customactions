@@ -1,0 +1,13 @@
+[import](common.lg)
+
+# SendActivity_Ncx8vO()
+[Activity
+    Text = ${SendActivity_Ncx8vO_text()}
+]
+
+# SendActivity_Ncx8vO_text()
+- ```Ok, here are our choices for the next activity:
+Add an author
+Add a book
+List my reports
+Ask a question to Power BI```

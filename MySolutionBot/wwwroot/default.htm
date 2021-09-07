@@ -1,0 +1,74 @@
+<!-- Copyright (c) Microsoft Corporation.
+Licensed under the MIT license. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Power BI QnA</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/default.css">
+</head>
+
+<body>
+    <main class="row" style="background-color: cornflowerblue;">
+        <section id="report-container" class="embed-container col-lg-12 col-md-12 col-sm-12"></section>
+        <section class="error-container"></section>
+    </main>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/lib/powerbi-client/dist/powerbi.min.js"></script>
+    <script>
+        var models = window["powerbi-client"].models;
+        var reportContainer = $("#report-container").get(0);
+        var errorContainer = $("#error-container").get(0);
+
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlSearchParams.entries());
+
+        var config = {
+            type: 'qna',
+            tokenType: models.TokenType.Embed,
+            accessToken: params.t,
+            embedUrl: "https://app.powerbi.com/qnaEmbed",// (groupId to be appended as query parameter if required),
+            datasetIds: [params.d],
+            viewMode: models.QnaMode.ResultOnly,
+            question: params.q
+        };
+
+        // Embed Power BI report when Access token and Embed URL are available
+        var report = powerbi.embed(reportContainer, config);
+
+        // Clear any other loaded handler events
+        report.off("loaded");
+
+        // Triggers when a report schema is successfully loaded
+        report.on("loaded", function () {
+            console.log("Report load successful");
+        });
+
+        // Clear any other rendered handler events
+        report.off("rendered");
+
+        // Triggers when a report is successfully embedded in UI
+        report.on("rendered", function () {
+            console.log("Report render successful");
+        });
+
+        // Clear any other error handler events
+        report.off("error");
+        
+        // Handle embed errors
+        report.on("error", function (event) {
+            var errorMsg = event.detail;
+            $(errorContainer).text(errorMsg);
+            console.error(errorMsg);
+            return;
+        });
+    
+    </script>
+</body>
+</html>

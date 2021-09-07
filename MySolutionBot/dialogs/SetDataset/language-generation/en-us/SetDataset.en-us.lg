@@ -1,0 +1,16 @@
+[import](common.lg)
+
+# TextInput_Prompt_f3hsDI()
+[Activity
+    Text = ${TextInput_Prompt_f3hsDI_text()}
+]
+
+# SendActivity_6aR9My()
+[Activity
+    Text = ${SendActivity_6aR9My_text()}
+]
+
+# TextInput_Prompt_f3hsDI_text()
+- Please, what is the name of the dataset you want to use? If it does not exists, I will create one.
+# SendActivity_6aR9My_text()
+- Ok, dataset defined.

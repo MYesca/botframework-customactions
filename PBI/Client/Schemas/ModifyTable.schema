@@ -1,0 +1,25 @@
+{
+    "$schema": "https://schemas.botframework.com/schemas/component/v1.0/component.schema",
+    "$role": "implements(Microsoft.IDialog)",
+    "title": "PBI Client - Modify Table",
+    "description": "This will modify an existing table schema",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "datasetId": {
+            "$ref": "schema:#/definitions/stringExpression",
+            "title": "Dataset Id",
+            "description": "Value or expression to evaluate as a dataset id"
+        },
+        "tableDefinition": {
+            "$ref": "schema:#/definitions/objectExpression",
+            "title": "Table Definition",
+            "description": "Value or expression to evaluate as a table schema definition object"
+        },
+        "resultProperty": {
+            "$ref": "schema:#/definitions/stringExpression",
+            "title": "Table Updated Result Property",
+            "description": "Property from callers memory to store the result of operation"
+        }
+    }
+}

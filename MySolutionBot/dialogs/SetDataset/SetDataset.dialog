@@ -1,0 +1,108 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "PKQyfh",
+    "name": "SetDataset",
+    "description": ""
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "8qxegT"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "f3hsDI"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "property": "conversation.dsName",
+          "prompt": "${TextInput_Prompt_f3hsDI()}"
+        },
+        {
+          "$kind": "CreateDataset",
+          "$designer": {
+            "id": "fqmac5"
+          },
+          "resultProperty": "conversation.dsId",
+          "datasetDefinition": {
+            "name": "${conversation.dsName}",
+            "tables": [
+              {
+                "name": "Author",
+                "columns": [
+                  {
+                    "name": "Name",
+                    "dataType": "string"
+                  },
+                  {
+                    "name": "Country",
+                    "dataType": "string"
+                  },
+                  {
+                    "name": "Age",
+                    "dataType": "Int64"
+                  }
+                ]
+              },
+              {
+                "name": "Book",
+                "columns": [
+                  {
+                    "name": "Title",
+                    "dataType": "string"
+                  },
+                  {
+                    "name": "AuthorName",
+                    "dataType": "string"
+                  },
+                  {
+                    "name": "Category",
+                    "dataType": "string"
+                  },
+                  {
+                    "name": "YearPublished",
+                    "dataType": "Int64"
+                  }
+                ]
+              }
+            ],
+            "relationships": [
+              {
+                "name": "BookAuthor",
+                "fromColumn": "AuthorName",
+                "fromTable": "Book",
+                "toColumn": "Name",
+                "toTable": "Author"
+              }
+            ]
+          }
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "6aR9My"
+          },
+          "activity": "${SendActivity_6aR9My()}"
+        }
+      ]
+    }
+  ],
+  "generator": "SetDataset.lg",
+  "recognizer": {
+    "$kind": "Microsoft.RegexRecognizer",
+    "intents": []
+  },
+  "id": "SetDataset"
+}

@@ -1,0 +1,21 @@
+[import](common.lg)
+
+# TextInput_Prompt_oUXjxM()
+[Activity
+    Text = What is the new author's name?
+]
+
+# TextInput_Prompt_V5GS2X()
+[Activity
+    Text = And the author's country of origin?
+]
+
+# NumberInput_Prompt_oshTRA()
+[Activity
+    Text = And finally, what is the author's age?
+]
+
+# SendActivity_sdFdix()
+[Activity
+    Text = Ok, new author registered.
+]

@@ -1,0 +1,104 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "eFxxGm",
+    "name": "AddAuthor",
+    "description": "Add an author the hard way"
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "52LFQ7"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "oUXjxM"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "prompt": "${TextInput_Prompt_oUXjxM()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "property": "dialog.authorName"
+        },
+        {
+          "$kind": "Microsoft.TextInput",
+          "$designer": {
+            "id": "V5GS2X"
+          },
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "prompt": "${TextInput_Prompt_V5GS2X()}",
+          "property": "dialog.authorCountry"
+        },
+        {
+          "$kind": "Microsoft.NumberInput",
+          "$designer": {
+            "id": "oshTRA"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": true,
+          "allowInterruptions": false,
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "prompt": "${NumberInput_Prompt_oshTRA()}",
+          "property": "dialog.authorAge"
+        },
+        {
+          "$kind": "AddRows",
+          "$designer": {
+            "id": "CBjFXY"
+          },
+          "datasetId": "=conversation.dsId",
+          "tableName": "Author",
+          "rowsDefinition": {
+            "rows": [
+              {
+                "Name": "${dialog.authorName}",
+                "Country": "${dialog.authorCountry}",
+                "Age": "${dialog.authorAge}"
+              }
+            ]
+          },
+          "resultProperty": "dialog.rowsAdded"
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "sdFdix"
+          },
+          "activity": "${SendActivity_sdFdix()}"
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "qPv54x"
+          },
+          "activityProcessed": true,
+          "dialog": "ListSamples",
+          "resultProperty": "dialog.choosenSample"
+        }
+      ]
+    }
+  ],
+  "generator": "AddAuthor.lg",
+  "recognizer": {
+    "$kind": "Microsoft.RegexRecognizer",
+    "intents": []
+  },
+  "id": "AddAuthor"
+}
